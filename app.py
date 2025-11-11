@@ -59,4 +59,7 @@ if file is not None:
 
     st.success("✅ Predictions Complete!")
     st.dataframe(df)
-    csv = df.
+    csv = df.to_csv(index=False).encode()
+    st.download_button("⬇️ Download Predictions CSV", csv, "predictions.csv", "text/csv")
+
+

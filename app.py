@@ -51,7 +51,7 @@ if st.button("🔍 Predict Potability"):
 if (6.5 <= ph <= 8.5) and (120 <= hardness <= 220) and (5000 <= solids <= 25000) and \
    (6 <= chloramines <= 9) and (250 <= sulfate <= 400) and (400 <= conductivity <= 700) and \
    (8 <= organic_carbon <= 15) and (50 <= trihalomethanes <= 90) and (2 <= turbidity <= 4):
-    st.success("✅ The water is **SAFE for Drinking.** 💧 (Based on ideal parameter range)")
+    st.success("✅ The water is **SAFE for Drinking.** 💧")
 else:
     if prediction == 1:
         st.success("✅ The water is **SAFE for Drinking.** 💧")
@@ -86,6 +86,7 @@ if file is not None:
 
     except Exception as e:
         st.error(f"⚠️ Error while processing file: {e}")
+
 
 
 

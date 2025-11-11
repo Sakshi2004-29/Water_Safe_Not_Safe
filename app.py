@@ -42,6 +42,17 @@ if st.button("🔍 Predict Potability"):
                                        "Trihalomethanes", "Turbidity"])
     prediction = model.predict(input_data)[0]
 
+    # Manual logical check for safe range
+# inside your button handler, after you create input_data and prediction
+# ------------------- SINGLE PREDICTION (with manual override) -------------------
+# prediction = model.predict(input_data)[0]   # make sure you have this line above
+
+# Manual logical check for safe range
+if (6.5 <= ph <= 8.5) and (120 <= hardness <= 220) and (5000 <= solids <= 25000) and \
+   (6 <= chloramines <= 9) and (250 <= sulfate <= 400) and (400 <= conductivity <= 700) and \
+   (8 <= organic_carbon <= 15) and (50 <= trihalomethanes <= 90) and (2 <= turbidity <= 4):
+    st.success("✅ The water is **SAFE for Drinking.** 💧 (Based on ideal parameter range)")
+else:
     if prediction == 1:
         st.success("✅ The water is **SAFE for Drinking.** 💧")
     else:
@@ -53,13 +64,30 @@ st.header("📂 Upload CSV for Batch Prediction")
 file = st.file_uploader("Upload CSV file with same column names as dataset", type=["csv"])
 
 if file is not None:
-    df = pd.read_csv(file)
-    preds = model.predict(df)
-    df["Prediction"] = ["Safe" if p == 1 else "Not Safe" for p in preds]
+    try:
+        df = pd.read_csv(file)
+        # handle missing values just in case
+        df = df.fillna(df.median())
 
-    st.success("✅ Predictions Complete!")
-    st.dataframe(df)
-    csv = df.to_csv(index=False).encode()
-    st.download_button("⬇️ Download Predictions CSV", csv, "predictions.csv", "text/csv")
+        # ensure columns order/names match model expectation
+        expected_cols = ["ph", "Hardness", "Solids", "Chloramines",
+                         "Sulfate", "Conductivity", "Organic_carbon",
+                         "Trihalomethanes", "Turbidity"]
+        if not all(col in df.columns for col in expected_cols):
+            st.error(f"CSV must contain columns: {expected_cols}")
+        else:
+            preds = model.predict(df[expected_cols])
+            df["Prediction"] = ["Safe" if p == 1 else "Not Safe" for p in preds]
+
+            st.success("✅ Predictions Complete!")
+            st.dataframe(df)
+            csv = df.to_csv(index=False).encode()
+            st.download_button("⬇️ Download Predictions CSV", csv, "predictions.csv", "text/csv")
+
+    except Exception as e:
+        st.error(f"⚠️ Error while processing file: {e}")
+
+
+
 
 

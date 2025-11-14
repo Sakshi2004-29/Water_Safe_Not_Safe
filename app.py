@@ -9,50 +9,53 @@ st.set_page_config(
     layout="wide"
 )
 
-# ---------------------- BACKGROUND + GLASS EFFECT CSS ----------------------
-bg_css = """
+# ---------------------- PREMIUM BACKGROUND + GLASS CSS ----------------------
+css = """
 <style>
 
-/* FULL BACKGROUND */
+/* FULL WATER BACKGROUND IMAGE */
 [data-testid="stAppViewContainer"] {
-    background: linear-gradient(135deg, #0A4F70, #1D3557, #0F2027);
+    background-image: url("https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=1920&q=80");
     background-size: cover;
+    background-position: center;
     background-attachment: fixed;
 }
 
-/* HEADER TRANSPARENT */
+/* Remove white header */
 [data-testid="stHeader"] {
     background: rgba(0,0,0,0);
 }
 
-/* SIDEBAR GLASS EFFECT */
-[data-testid="stSidebar"] {
-    background: rgba(255,255,255,0.07);
-    backdrop-filter: blur(12px);
-    border-right: 1px solid rgba(255,255,255,0.2);
+/* HERO TEXT STYLE */
+.hero-title {
+    font-size: 55px;
+    font-weight: 800;
+    color: #ffffff;
+    text-shadow: 0px 0px 20px rgba(0,255,255,0.7);
+    text-align: center;
+    margin-top: 40px;
 }
 
-/* MAIN CARD GLASS EFFECT */
-.block-container {
-    background: rgba(255, 255, 255, 0.08);
-    padding: 2rem 2rem;
-    margin-top: 2rem;
+.hero-sub {
+    font-size: 20px;
+    text-align: center;
+    color: #e3faff;
+    margin-top: -15px;
+}
+
+/* GLASS CONTAINER */
+.glass-box {
+    background: rgba(255, 255, 255, 0.15);
     border-radius: 18px;
+    padding: 30px;
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(255,255,255,0.2);
-    box-shadow: 0 0 30px rgba(0,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.25);
+    box-shadow: 0 0 25px rgba(0,0,0,0.2);
 }
 
-/* TITLE GLOW */
-h1, h2, h3 {
-    color: white !important;
-    text-shadow: 0px 0px 20px #00eaff;
-    font-weight: 700;
-}
-
-/* BUTTON STYLING */
+/* BUTTON STYLE */
 .stButton>button {
-    background: linear-gradient(45deg, #00c8ff, #0077b6);
+    background: linear-gradient(45deg, #00d4ff, #0077b6);
     padding: 10px 25px;
     color: white;
     border-radius: 12px;
@@ -62,34 +65,37 @@ h1, h2, h3 {
 }
 
 .stButton>button:hover {
-    transform: scale(1.07);
+    transform: scale(1.05);
     box-shadow: 0 0 20px #00eaff;
 }
 
-/* INPUT FIELDS */
+/* FIELDS */
 .stNumberInput input {
-    background: rgba(255,255,255,0.12) !important;
+    background: rgba(255,255,255,0.20) !important;
     color: white !important;
     border-radius: 10px;
 }
 
-/* SLIDERS + LABELS */
-label, .st-af {
-    color: #E8F9FD !important;
+label, .css-16idsys p {
+    color: #eaffff !important;
+    font-weight: 600;
 }
 
 </style>
 """
+st.markdown(css, unsafe_allow_html=True)
 
-st.markdown(bg_css, unsafe_allow_html=True)
+# ---------------------- HERO SECTION ----------------------
+st.markdown("<h1 class='hero-title'>Always Want Safe Water<br>For Healthy Life</h1>", unsafe_allow_html=True)
+st.markdown("<p class='hero-sub'>Check water potability using AI — ensure purity before drinking.</p>", unsafe_allow_html=True)
+st.markdown("<br>", unsafe_allow_html=True)
 
+# ---------------------- GLASS CARD START ----------------------
+st.markdown("<div class='glass-box'>", unsafe_allow_html=True)
 
-# ---------------------- TITLE ----------------------
-st.markdown("<h1 style='text-align:center;'>💧 Water Potability Prediction App</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align:center;font-size:18px;'>Predict whether water is <b>Drinkable</b> or <b>Not Safe</b> using AI</p>", unsafe_allow_html=True)
+st.markdown("### 💧 Enter Water Parameters")
 
-
-# ---------------------- LOAD CATBOOST MODEL ----------------------
+# ---------------------- LOAD MODEL ----------------------
 @st.cache_resource
 def load_model():
     model = CatBoostClassifier()
@@ -98,10 +104,7 @@ def load_model():
 
 model = load_model()
 
-
-# ---------------------- INPUT SECTION ----------------------
-st.markdown("### 🧪 Enter Water Parameters Below")
-
+# ---------------------- INPUT FIELDS ----------------------
 col1, col2, col3 = st.columns(3)
 ph = col1.number_input("pH (6.5–8.5)", 0.0, 14.0, 7.0)
 hardness = col2.number_input("Hardness (mg/L)", 0.0, 500.0, 180.0)
@@ -117,19 +120,17 @@ organic_carbon = col7.number_input("Organic Carbon (mg/L)", 0.0, 50.0, 10.0)
 trihalomethanes = col8.number_input("Trihalomethanes (µg/L)", 0.0, 150.0, 70.0)
 turbidity = col9.number_input("Turbidity (NTU)", 0.0, 10.0, 3.0)
 
-
-# ---------------------- SINGLE PREDICTION BUTTON ----------------------
+# ---------------------- PREDICTION ----------------------
 if st.button("🔍 Predict Potability"):
     
-    input_data = pd.DataFrame([[ph, hardness, solids, chloramines, sulfate, conductivity,
-                                organic_carbon, trihalomethanes, turbidity]],
-                              columns=["ph", "Hardness", "Solids", "Chloramines",
-                                       "Sulfate", "Conductivity", "Organic_carbon",
-                                       "Trihalomethanes", "Turbidity"])
+    data = pd.DataFrame([[ph, hardness, solids, chloramines, sulfate, conductivity,
+                          organic_carbon, trihalomethanes, turbidity]],
+                        columns=["ph", "Hardness", "Solids", "Chloramines",
+                                 "Sulfate", "Conductivity", "Organic_carbon",
+                                 "Trihalomethanes", "Turbidity"])
 
-    prediction = model.predict(input_data)[0]
+    prediction = model.predict(data)[0]
 
-    # Manual safe limits check
     safe_cond = (
         (6.5 <= ph <= 8.5) and (120 <= hardness <= 220) and (5000 <= solids <= 25000) and
         (6 <= chloramines <= 9) and (250 <= sulfate <= 400) and (400 <= conductivity <= 700) and
@@ -137,37 +138,31 @@ if st.button("🔍 Predict Potability"):
     )
 
     if safe_cond or prediction == 1:
-        st.success("💧 The water is SAFE for Drinking! 💙")
+        st.success("💙 The water is SAFE for Drinking!")
     else:
         st.error("🚫 The water is NOT SAFE. Please purify before use.")
 
+# ---------------------- GLASS DIV END ----------------------
+st.markdown("</div>", unsafe_allow_html=True)
 
-# ---------------------- CSV UPLOAD ----------------------
-st.markdown("---")
+# ---------------------- CSV SECTION ----------------------
+st.markdown("<br><div class='glass-box'>", unsafe_allow_html=True)
 st.markdown("### 📂 Upload CSV for Batch Prediction")
 
-file = st.file_uploader("Upload CSV file (same columns as dataset)", type=["csv"])
+file = st.file_uploader("Upload CSV file:", type=["csv"])
 
-if file is not None:
-    try:
-        df = pd.read_csv(file)
-        df = df.fillna(df.median())
+if file:
+    df = pd.read_csv(file).fillna(df.median())
 
-        expected_cols = ["ph", "Hardness", "Solids", "Chloramines",
-                         "Sulfate", "Conductivity", "Organic_carbon",
-                         "Trihalomethanes", "Turbidity"]
+    cols = ["ph", "Hardness", "Solids", "Chloramines",
+            "Sulfate", "Conductivity", "Organic_carbon",
+            "Trihalomethanes", "Turbidity"]
 
-        if not all(c in df.columns for c in expected_cols):
-            st.error("CSV missing required columns!")
-        else:
-            preds = model.predict(df[expected_cols])
-            df["Prediction"] = ["Safe" if p == 1 else "Not Safe" for p in preds]
+    if all(c in df.columns for c in cols):
+        preds = model.predict(df[cols])
+        df["Prediction"] = ["Safe" if p == 1 else "Not Safe" for p in preds]
+        st.dataframe(df)
+    else:
+        st.error("❌ Incorrect column names!")
 
-            st.success("✅ Predictions Generated!")
-            st.dataframe(df)
-
-            csv = df.to_csv(index=False).encode()
-            st.download_button("⬇️ Download Predictions", csv, "predictions.csv", "text/csv")
-
-    except Exception as e:
-        st.error(f"⚠️ Error: {e}")
+st.markdown("</div>", unsafe_allow_html=True)

@@ -1,4 +1,4 @@
-# app.py — Final AquaGuard (Purple result theme + logo + animations + footer)
+# FINAL AquaGuard – With Bubbles + Input Glow + Purple Theme (Complete ready code)
 import streamlit as st
 import pandas as pd
 from catboost import CatBoostClassifier
@@ -56,16 +56,27 @@ css = r"""
   box-shadow: 0 10px 30px rgba(16,24,40,0.06);
 }
 
-/* INPUT labels & fields styling */
+/* INPUT labels */
 label, .css-16idsys p, .st-bc {
   color: #0b2540 !important;
   font-weight: 800 !important;
 }
+
+/* INPUT field */
 .stNumberInput input {
   background: rgba(255,255,255,0.95) !important;
   color: #001222 !important;
   font-weight: 800;
   border-radius: 10px;
+}
+
+/* INPUT GLOW EFFECT ON FOCUS */
+.stNumberInput input:focus {
+    border: 2px solid #a15be0 !important;
+    box-shadow: 0 0 16px rgba(161, 91, 224, 0.55) !important;
+    outline: none !important;
+    transform: scale(1.02);
+    transition: 0.15s ease-in-out;
 }
 
 /* Button style */
@@ -106,10 +117,39 @@ label, .css-16idsys p, .st-bc {
   margin-top: 14px;
 }
 
-/* Loader text */
-.loading {
-  font-weight: 800;
-  color: #2b1b3a;
+/* FLOATING BUBBLES BACKGROUND */
+.bubble-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.bubble {
+    position: absolute;
+    bottom: -80px;
+    width: 18px;
+    height: 18px;
+    background: rgba(125, 60, 190, 0.20);
+    border-radius: 50%;
+    animation: rise 9s infinite ease-in;
+    filter: blur(1px);
+}
+
+.bubble:nth-child(2) { left: 20%; width: 14px; height: 14px; animation-duration: 7s; }
+.bubble:nth-child(3) { left: 35%; width: 22px; height: 22px; animation-duration: 11s; }
+.bubble:nth-child(4) { left: 50%; width: 12px; height: 12px; animation-duration: 8s; }
+.bubble:nth-child(5) { left: 65%; width: 20px; height: 20px; animation-duration: 10s; }
+.bubble:nth-child(6) { left: 80%; width: 16px; height: 16px; animation-duration: 6s; }
+
+@keyframes rise {
+    0% { transform: translateY(0) scale(1); opacity: 0.8; }
+    50% { opacity: 0.4; }
+    100% { transform: translateY(-120vh) scale(1.35); opacity: 0; }
 }
 
 /* Animated water ripple footer */
@@ -150,23 +190,29 @@ label, .css-16idsys p, .st-bc {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
-
-/* small responsive tweaks */
-@media (max-width: 900px) {
-  .hero-title { font-size: 34px; margin-top: 20px; }
-  .glass { padding: 18px; }
-}
 </style>
 
-<!-- TOP-LEFT LOGO -->
+<!-- LOGO -->
 <div class="logo">💧 <strong>AquaGuard</strong></div>
-
 """
 st.markdown(css, unsafe_allow_html=True)
 
 # ---------------- HERO ----------------
 st.markdown("<div class='hero-title'>✨ AQUAGUARD – AI Powered Water Safety Checker ✨</div>", unsafe_allow_html=True)
 st.markdown("<p style='text-align:center; color:#0b2540; font-weight:700; margin-top:6px;'>Ensuring pure & safe water for every life — powered by smart ML.</p>", unsafe_allow_html=True)
+
+# ---------------- BUBBLES ----------------
+st.markdown("""
+<div class="bubble-container">
+   <div class="bubble"></div>
+   <div class="bubble"></div>
+   <div class="bubble"></div>
+   <div class="bubble"></div>
+   <div class="bubble"></div>
+   <div class="bubble"></div>
+</div>
+""", unsafe_allow_html=True)
+
 st.markdown("<br>", unsafe_allow_html=True)
 
 # ---------------- LOAD MODEL ----------------
@@ -178,24 +224,24 @@ def load_model():
 
 model = load_model()
 
-# ---------------- GLASS PANEL (FORM) ----------------
+# ---------------- GLASS FORM ----------------
 st.markdown("<div class='glass'>", unsafe_allow_html=True)
 st.markdown("<h3 style='color:#071a2f; font-weight:900;'>💧 Enter Water Parameters</h3>", unsafe_allow_html=True)
 
 col1, col2, col3 = st.columns(3)
-ph = col1.number_input("pH ", 0.0, 14.0, 7.0, format="%.2f")
-hardness = col2.number_input("Hardness (mg/L)", 0.0, 500.0, 180.0, format="%.2f")
-solids = col3.number_input("Solids (ppm)", 0.0, 50000.0, 15000.0, format="%.2f")
+ph = col1.number_input("pH", 0.0, 14.0, 7.0, format="%.2f")
+hardness = col2.number_input("Hardness", 0.0, 500.0, 180.0, format="%.2f")
+solids = col3.number_input("Solids", 0.0, 50000.0, 15000.0, format="%.2f")
 
 col4, col5, col6 = st.columns(3)
-chloramines = col4.number_input("Chloramines (ppm)", 0.0, 15.0, 7.5, format="%.2f")
-sulfate = col5.number_input("Sulfate (mg/L)", 0.0, 500.0, 330.0, format="%.2f")
-conductivity = col6.number_input("Conductivity (µS/cm)", 0.0, 1000.0, 500.0, format="%.2f")
+chloramines = col4.number_input("Chloramines", 0.0, 15.0, 7.5, format="%.2f")
+sulfate = col5.number_input("Sulfate", 0.0, 500.0, 330.0, format="%.2f")
+conductivity = col6.number_input("Conductivity", 0.0, 1000.0, 500.0, format="%.2f")
 
 col7, col8, col9 = st.columns(3)
-organic_carbon = col7.number_input("Organic Carbon (mg/L)", 0.0, 50.0, 10.0, format="%.2f")
-trihalomethanes = col8.number_input("Trihalomethanes (µg/L)", 0.0, 150.0, 70.0, format="%.2f")
-turbidity = col9.number_input("Turbidity (NTU)", 0.0, 10.0, 3.0, format="%.2f")
+organic_carbon = col7.number_input("Organic Carbon", 0.0, 50.0, 10.0, format="%.2f")
+trihalomethanes = col8.number_input("Trihalomethanes", 0.0, 150.0, 70.0, format="%.2f")
+turbidity = col9.number_input("Turbidity", 0.0, 10.0, 3.0, format="%.2f")
 
 # ---------------- PREDICT BUTTON ----------------
 if st.button("🔍 Predict Potability"):
@@ -205,19 +251,16 @@ if st.button("🔍 Predict Potability"):
                             columns=["ph","Hardness","Solids","Chloramines","Sulfate",
                                      "Conductivity","Organic_carbon","Trihalomethanes","Turbidity"])
 
-    # show a spinner + custom loading text
     with st.spinner("🔬 Analyzing water quality with AquaGuard..."):
-        time.sleep(1.0)  # small pause so users see animation (feel free to adjust)
+        time.sleep(1.0)
         pred = model.predict(df_input)[0]
 
-    # manual safe checks as extra rule
     safe_cond = (
         (6.5 <= ph <= 8.5) and (120 <= hardness <= 220) and (5000 <= solids <= 25000) and
         (6 <= chloramines <= 9) and (250 <= sulfate <= 400) and (400 <= conductivity <= 700) and
         (8 <= organic_carbon <= 15) and (50 <= trihalomethanes <= 90) and (2 <= turbidity <= 4)
     )
 
-    # Show purple-themed result banners with clear readable text
     if safe_cond or pred == 1:
         st.markdown("<div class='result-safe'>💜 <span style='font-size:18px'>The water is <strong>SAFE for Drinking</strong> — AquaGuard indicates good potability.</span></div>", unsafe_allow_html=True)
         st.markdown("<div style='margin-top:8px;color:#2b154a;font-weight:700;'>Suggestion: Continue regular monitoring. Consider filtration if taste/odor issues are observed.</div>", unsafe_allow_html=True)
@@ -227,7 +270,7 @@ if st.button("🔍 Predict Potability"):
 
 st.markdown("</div>", unsafe_allow_html=True)
 
-# ---------------- CSV BATCH PREDICTION ----------------
+# ---------------- CSV BATCH ----------------
 st.markdown("<br><div class='glass'>", unsafe_allow_html=True)
 st.markdown("<h3 style='color:#071a2f; font-weight:900;'>📂 Upload CSV for Batch Prediction</h3>", unsafe_allow_html=True)
 
@@ -261,5 +304,3 @@ footer_html = """
 </div>
 """
 st.markdown(footer_html, unsafe_allow_html=True)
-
-

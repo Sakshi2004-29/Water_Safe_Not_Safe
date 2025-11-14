@@ -5,7 +5,7 @@ from catboost import CatBoostClassifier
 import time
 
 # ---------------- PAGE CONFIG ----------------
-st.set_page_config(page_title="AquaGuard 💧", page_icon="💦", layout="wide")
+st.set_page_config(page_title="SafeSip 💧", page_icon="💦", layout="wide")
 
 # ---------------- CUSTOM CSS & HTML ----------------
 css = r"""
@@ -193,12 +193,12 @@ label, .css-16idsys p, .st-bc {
 </style>
 
 <!-- LOGO -->
-<div class="logo">💧 <strong>AquaGuard</strong></div>
+<div class="logo">💧 <strong>SafeSip</strong></div>
 """
 st.markdown(css, unsafe_allow_html=True)
 
 # ---------------- HERO ----------------
-st.markdown("<div class='hero-title'>✨ AQUAGUARD – AI Powered Water Safety Checker ✨</div>", unsafe_allow_html=True)
+st.markdown("<div class='hero-title'>✨ SafeSip – AI Powered Water Safety Checker ✨</div>", unsafe_allow_html=True)
 st.markdown("<p style='text-align:center; color:#0b2540; font-weight:700; margin-top:6px;'>Ensuring pure & safe water for every life — powered by smart ML.</p>", unsafe_allow_html=True)
 
 # ---------------- BUBBLES ----------------
@@ -251,7 +251,7 @@ if st.button("🔍 Predict Potability"):
                             columns=["ph","Hardness","Solids","Chloramines","Sulfate",
                                      "Conductivity","Organic_carbon","Trihalomethanes","Turbidity"])
 
-    with st.spinner("🔬 Analyzing water quality with AquaGuard..."):
+    with st.spinner("🔬 Analyzing water quality with SafeSip..."):
         time.sleep(1.0)
         pred = model.predict(df_input)[0]
 
@@ -262,7 +262,7 @@ if st.button("🔍 Predict Potability"):
     )
 
     if safe_cond or pred == 1:
-        st.markdown("<div class='result-safe'>💜 <span style='font-size:18px'>The water is <strong>SAFE for Drinking</strong> — AquaGuard indicates good potability.</span></div>", unsafe_allow_html=True)
+        st.markdown("<div class='result-safe'>💜 <span style='font-size:18px'>The water is <strong>SAFE for Drinking</strong> — SafeSip indicates good potability.</span></div>", unsafe_allow_html=True)
         st.markdown("<div style='margin-top:8px;color:#2b154a;font-weight:700;'>Suggestion: Continue regular monitoring. Consider filtration if taste/odor issues are observed.</div>", unsafe_allow_html=True)
     else:
         st.markdown("<div class='result-unsafe'>⛔ <span style='font-size:18px'>The water is <strong>NOT SAFE</strong> for direct drinking. Purification recommended.</span></div>", unsafe_allow_html=True)
@@ -290,7 +290,7 @@ if file:
             st.success("✅ Batch predictions complete!")
             st.dataframe(df)
             csv = df.to_csv(index=False).encode()
-            st.download_button("⬇️ Download Results (CSV)", csv, "aquaguard_predictions.csv", "text/csv")
+            st.download_button("⬇️ Download Results (CSV)", csv, "SafeSip_predictions.csv", "text/csv")
     except Exception as e:
         st.error(f"Error processing CSV: {e}")
 
@@ -304,3 +304,4 @@ footer_html = """
 </div>
 """
 st.markdown(footer_html, unsafe_allow_html=True)
+

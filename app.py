@@ -180,10 +180,10 @@ model = load_model()
 
 # ---------------- GLASS PANEL (FORM) ----------------
 st.markdown("<div class='glass'>", unsafe_allow_html=True)
-st.markdown("### 💧 Enter Water Parameters", unsafe_allow_html=True)
+st.markdown("<h3 style='color:#071a2f; font-weight:900;'>💧 Enter Water Parameters</h3>", unsafe_allow_html=True)
 
 col1, col2, col3 = st.columns(3)
-ph = col1.number_input("pH (6.5–8.5)", 0.0, 14.0, 7.0, format="%.2f")
+ph = col1.number_input("pH ", 0.0, 14.0, 7.0, format="%.2f")
 hardness = col2.number_input("Hardness (mg/L)", 0.0, 500.0, 180.0, format="%.2f")
 solids = col3.number_input("Solids (ppm)", 0.0, 50000.0, 15000.0, format="%.2f")
 
@@ -261,3 +261,4 @@ footer_html = """
 </div>
 """
 st.markdown(footer_html, unsafe_allow_html=True)
+

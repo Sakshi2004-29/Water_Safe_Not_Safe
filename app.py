@@ -4,81 +4,91 @@ from catboost import CatBoostClassifier
 
 # ---------------------- PAGE CONFIG ----------------------
 st.set_page_config(
-    page_title="💧 Water Potability Checker",
+    page_title="AquaGuard 💧",
     page_icon="💦",
     layout="wide"
 )
 
-# ---------------------- PREMIUM BACKGROUND + GLASS CSS ----------------------
+# ---------------------- AQUA GRADIENT + GLASS CSS ----------------------
 css = """
 <style>
 
-/* FULL WATER BACKGROUND IMAGE */
+/* FULL BACKGROUND */
 [data-testid="stAppViewContainer"] {
-    background-image: url("https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?auto=format&fit=crop&w=1920&q=80");
-    background-size: cover;
-    background-position: center;
+    background: linear-gradient(135deg,#dff9fb,#c7ecee,#a5d8ff,#74b9ff,#81ecec);
     background-attachment: fixed;
+    background-size: cover;
 }
 
-/* Remove white header */
+/* TRANSPARENT HEADER */
 [data-testid="stHeader"] {
     background: rgba(0,0,0,0);
 }
 
-/* HERO TEXT STYLE */
+/* HERO TITLE */
 .hero-title {
     font-size: 55px;
-    font-weight: 800;
-    color: #ffffff;
-    text-shadow: 0px 0px 20px rgba(0,255,255,0.7);
+    font-weight: 900;
+    color: #012a4a;
     text-align: center;
     margin-top: 40px;
+    text-shadow: 0px 0px 8px rgba(0,100,255,0.15);
 }
 
+/* HERO SUBTITLE */
 .hero-sub {
     font-size: 20px;
+    font-weight: 600;
     text-align: center;
-    color: #e3faff;
-    margin-top: -15px;
+    color: #013a63;
+    margin-top: -10px;
 }
 
-/* GLASS CONTAINER */
+/* GLASS EFFECT MAIN CARD */
 .glass-box {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255,255,255,0.45);
     border-radius: 18px;
     padding: 30px;
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(255,255,255,0.25);
-    box-shadow: 0 0 25px rgba(0,0,0,0.2);
+    border: 1px solid rgba(255,255,255,0.4);
+    box-shadow: 0 0 25px rgba(0,0,0,0.15);
+}
+
+/* BLACK INPUT LABELS */
+label {
+    color: #001f33 !important;
+    font-weight: 700 !important;
+}
+
+/* INPUT FIELD */
+.stNumberInput input {
+    background: rgba(255,255,255,0.75) !important;
+    color: #001f33 !important;
+    font-weight: 700;
+    border-radius: 10px;
 }
 
 /* BUTTON STYLE */
 .stButton>button {
-    background: linear-gradient(45deg, #00d4ff, #0077b6);
+    background: linear-gradient(45deg,#0096c7,#0077b6);
     padding: 10px 25px;
     color: white;
     border-radius: 12px;
     border: none;
     font-size: 18px;
+    font-weight: 700;
     transition: 0.3s;
 }
 
 .stButton>button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px #00eaff;
+    transform: scale(1.07);
+    box-shadow: 0 0 20px #00b4d8;
 }
 
-/* FIELDS */
-.stNumberInput input {
-    background: rgba(255,255,255,0.20) !important;
-    color: white !important;
-    border-radius: 10px;
-}
-
-label, .css-16idsys p {
-    color: #eaffff !important;
-    font-weight: 600;
+/* CSV Upload Text */
+.css-16idsys p {
+    color: #001f33 !important;
+    font-weight: 700;
 }
 
 </style>
@@ -86,14 +96,10 @@ label, .css-16idsys p {
 st.markdown(css, unsafe_allow_html=True)
 
 # ---------------------- HERO SECTION ----------------------
-st.markdown("<h1 class='hero-title'>Always Want Safe Water<br>For Healthy Life</h1>", unsafe_allow_html=True)
-st.markdown("<p class='hero-sub'>Check water potability using AI — ensure purity before drinking.</p>", unsafe_allow_html=True)
+st.markdown("<h1 class='hero-title'>✨ AQUAGUARD – AI Powered Water Safety Checker ✨</h1>", unsafe_allow_html=True)
+st.markdown("<p class='hero-sub'>Ensuring pure & safe water for every life — powered by Smart Machine Learning.</p>", unsafe_allow_html=True)
 st.markdown("<br>", unsafe_allow_html=True)
 
-# ---------------------- GLASS CARD START ----------------------
-st.markdown("<div class='glass-box'>", unsafe_allow_html=True)
-
-st.markdown("### 💧 Enter Water Parameters")
 
 # ---------------------- LOAD MODEL ----------------------
 @st.cache_resource
@@ -104,7 +110,11 @@ def load_model():
 
 model = load_model()
 
-# ---------------------- INPUT FIELDS ----------------------
+# ---------------------- GLASS PANEL ----------------------
+st.markdown("<div class='glass-box'>", unsafe_allow_html=True)
+
+st.markdown("### 💧 Enter Water Parameters")
+
 col1, col2, col3 = st.columns(3)
 ph = col1.number_input("pH (6.5–8.5)", 0.0, 14.0, 7.0)
 hardness = col2.number_input("Hardness (mg/L)", 0.0, 500.0, 180.0)
@@ -120,9 +130,9 @@ organic_carbon = col7.number_input("Organic Carbon (mg/L)", 0.0, 50.0, 10.0)
 trihalomethanes = col8.number_input("Trihalomethanes (µg/L)", 0.0, 150.0, 70.0)
 turbidity = col9.number_input("Turbidity (NTU)", 0.0, 10.0, 3.0)
 
+
 # ---------------------- PREDICTION ----------------------
 if st.button("🔍 Predict Potability"):
-    
     data = pd.DataFrame([[ph, hardness, solids, chloramines, sulfate, conductivity,
                           organic_carbon, trihalomethanes, turbidity]],
                         columns=["ph", "Hardness", "Solids", "Chloramines",
@@ -142,10 +152,10 @@ if st.button("🔍 Predict Potability"):
     else:
         st.error("🚫 The water is NOT SAFE. Please purify before use.")
 
-# ---------------------- GLASS DIV END ----------------------
 st.markdown("</div>", unsafe_allow_html=True)
 
-# ---------------------- CSV SECTION ----------------------
+
+# ---------------------- CSV BOX ----------------------
 st.markdown("<br><div class='glass-box'>", unsafe_allow_html=True)
 st.markdown("### 📂 Upload CSV for Batch Prediction")
 
@@ -163,6 +173,6 @@ if file:
         df["Prediction"] = ["Safe" if p == 1 else "Not Safe" for p in preds]
         st.dataframe(df)
     else:
-        st.error("❌ Incorrect column names!")
+        st.error("❌ Wrong column names in CSV!")
 
 st.markdown("</div>", unsafe_allow_html=True)

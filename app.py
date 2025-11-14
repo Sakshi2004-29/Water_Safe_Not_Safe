@@ -198,7 +198,7 @@ label, .css-16idsys p, .st-bc {
 st.markdown(css, unsafe_allow_html=True)
 
 # ---------------- HERO ----------------
-st.markdown("<div class='hero-title'>✨ SafeSip – AI Powered Water Safety Checker ✨</div>", unsafe_allow_html=True)
+st.markdown("<div class='hero-title'>✨ SafeSip – Water Safety Checker ✨</div>", unsafe_allow_html=True)
 st.markdown("<p style='text-align:center; color:#0b2540; font-weight:700; margin-top:6px;'>Ensuring pure & safe water for every life — powered by smart ML.</p>", unsafe_allow_html=True)
 
 # ---------------- BUBBLES ----------------
@@ -304,4 +304,5 @@ footer_html = """
 </div>
 """
 st.markdown(footer_html, unsafe_allow_html=True)
+
 

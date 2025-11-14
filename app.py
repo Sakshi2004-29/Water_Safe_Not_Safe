@@ -229,7 +229,7 @@ st.markdown("</div>", unsafe_allow_html=True)
 
 # ---------------- CSV BATCH PREDICTION ----------------
 st.markdown("<br><div class='glass'>", unsafe_allow_html=True)
-st.markdown("### 📂 Upload CSV for Batch Prediction", unsafe_allow_html=True)
+st.markdown("<h3 style='color:#071a2f; font-weight:900;'>📂 Upload CSV for Batch Prediction</h3>", unsafe_allow_html=True)
 
 file = st.file_uploader("Upload CSV (columns: ph, Hardness, Solids, Chloramines, Sulfate, Conductivity, Organic_carbon, Trihalomethanes, Turbidity):", type=["csv"])
 if file:
@@ -261,4 +261,5 @@ footer_html = """
 </div>
 """
 st.markdown(footer_html, unsafe_allow_html=True)
+
 

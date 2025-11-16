@@ -1,26 +1,28 @@
-# Water_Safe_Not_Safe
-SafeSip – AI Based Water Potability Prediction System
+# SafeSip – AI Based Water Potability Prediction System
 
+<br>
 
-📌 Project Overview
+## 📌 Project Overview
 
 This project predicts whether water is safe for drinking based on chemical and physical water quality parameters.
 Using advanced Machine Learning models and a Streamlit-based UI, the system helps detect water safety quickly and accurately.
 
-🎯 Problem Statement
+<br> 
+
+## 🎯 Problem Statement
 
 Many regions do not have access to instant water quality testing tools.
 Manual lab testing is time-consuming and expensive, which leads to health risks.
 
 This project solves the problem by:
 
-Predicting potability using ML
+• Predicting potability using ML
+• Providing instant results
+• Helping people avoid unsafe drinking water
 
-Providing instant results
+<br> 
 
-Helping people avoid unsafe drinking water
-
-📂 Dataset
+## 📂 Dataset
 
 The dataset contains 3276 rows with 9 water quality parameters:
 

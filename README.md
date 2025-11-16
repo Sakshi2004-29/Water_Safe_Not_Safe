@@ -40,9 +40,11 @@ The repository includes:
 ● Project Report 
 <br>
 
+
 ## 🚀 Live Demo
 https://watersafenotsafe.streamlit.app/
 <br>
+
 
 ## 📊 Dataset Description
 | Feature             | Description                      |
@@ -58,6 +60,7 @@ https://watersafenotsafe.streamlit.app/
 | **Turbidity**       | Clarity of water                 |
 | **Potability**      | 1 = Drinkable, 0 = Not Drinkable |
 <br>
+
 
 ## 🧪 Machine Learning Models Used
 
@@ -79,6 +82,7 @@ https://watersafenotsafe.streamlit.app/
 
   ✦ Fast training
 <br>
+
 
 ## 🧠 ML Pipeline
 

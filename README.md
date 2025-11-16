@@ -2,13 +2,6 @@
 
 <br>
 
-## 📌 Project Overview
-
-This project predicts whether water is safe for drinking based on chemical and physical water quality parameters.
-Using advanced Machine Learning models and a Streamlit-based UI, the system helps detect water safety quickly and accurately.
-
-<br> 
-
 ## 🎯 Problem Statement
 
 Many regions do not have access to instant water quality testing tools.
@@ -24,7 +17,7 @@ This project solves the problem by:
 
 <br> 
 
-📌 Overview
+## 📌 Overview
 
 This project predicts whether drinking water is Safe (1) or Not Safe (0) using chemical and physical water quality parameters.
 
@@ -46,3 +39,6 @@ The repository includes:
 
 ● Project Report 
 <br>
+
+## 🚀 Live Demo
+https://watersafenotsafe.streamlit.app/

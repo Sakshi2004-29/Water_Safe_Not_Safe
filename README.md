@@ -144,7 +144,7 @@ https://watersafenotsafe.streamlit.app/
 
 ## 🏁 Conclusion
 
-AquaGuard provides a fast, efficient, and accurate way to determine water potability using machine learning.
+SafeSip provides a fast, efficient, and accurate way to determine water potability using machine learning.
 The system can be integrated into smart cities, IoT devices, and water treatment facilities.
 
 <br>

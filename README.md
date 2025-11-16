@@ -43,6 +43,7 @@ The repository includes:
 ## 🚀 Live Demo
 https://watersafenotsafe.streamlit.app/
 <br>
+
 ## 📊 Dataset Description
 | Feature             | Description                      |
 | ------------------- | -------------------------------- |
@@ -100,4 +101,44 @@ https://watersafenotsafe.streamlit.app/
 ○ Final model selection
 
 ○ Streamlit deployment
+
+<br>
+
+## 🛠️ Tech Stack
+
+1) Python
+
+2) Pandas, NumPy
+
+3) Scikit-Learn
+
+4) Optuna (Hyperparameter Tuning)
+
+5) CatBoost, XGBoost, LightGBM
+
+6) Streamlit
+
+7) Seaborn, Matplotlib
+
+<br>
+
+## 🌍 Real-World Applications
+
+💧 Rural drinking water testing
+
+💧 Household water purifier quality checks
+
+💧 Environmental monitoring systems
+
+💧 IoT-based water quality alerts
+
+💧 Government water supply assessment
+
+<br>
+
+## 🏁 Conclusion
+
+AquaGuard provides a fast, efficient, and accurate way to determine water potability using machine learning.
+The system can be integrated into smart cities, IoT devices, and water treatment facilities.
+
 <br>

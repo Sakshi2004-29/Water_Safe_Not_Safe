@@ -42,3 +42,18 @@ The repository includes:
 
 ## 🚀 Live Demo
 https://watersafenotsafe.streamlit.app/
+<br>
+## 📊 Dataset Description
+| Feature             | Description                      |
+| ------------------- | -------------------------------- |
+| **pH**              | Acidity/Basicity of water        |
+| **Hardness**        | Mineral concentration            |
+| **Solids**          | Total dissolved solids (TDS)     |
+| **Chloramines**     | Water disinfectant concentration |
+| **Sulfate**         | Sulfur minerals                  |
+| **Conductivity**    | Electrical conductivity          |
+| **Organic Carbon**  | Organic impurities               |
+| **Trihalomethanes** | Disinfection by-products         |
+| **Turbidity**       | Clarity of water                 |
+| **Potability**      | 1 = Drinkable, 0 = Not Drinkable |
+<br>

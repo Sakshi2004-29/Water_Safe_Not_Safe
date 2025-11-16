@@ -81,6 +81,7 @@ https://watersafenotsafe.streamlit.app/
   ✦ Handles non-linear patterns
 
   ✦ Fast training
+  
 <br>
 
 

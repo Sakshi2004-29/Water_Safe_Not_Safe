@@ -57,3 +57,22 @@ https://watersafenotsafe.streamlit.app/
 | **Turbidity**       | Clarity of water                 |
 | **Potability**      | 1 = Drinkable, 0 = Not Drinkable |
 <br>
+## 🧪 Machine Learning Models Used
+| Model                      | Accuracy | Notes            |
+| -------------------------- | -------- | ---------------- |
+| **Random Forest (Optuna)** | ~83%     | Strong baseline  |
+| **AdaBoost (Optuna)**      | ~74%     | Weak performer   |
+| **CatBoost (Optuna)**      | ~84%     | Best accuracy    |
+| **LightGBM (Optuna)**      | ~81%     | Fast & efficient |
+| **XGBoost (Optuna)**       | ~81.6%   | Good balance     |
+
+✔ Selected Final Model: CatBoostClassifier
+
+✦ Best accuracy
+
+✦ Handles missing values
+
+✦ Handles non-linear patterns
+
+✦ Fast training
+<br>

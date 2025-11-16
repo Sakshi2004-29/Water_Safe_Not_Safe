@@ -1,4 +1,4 @@
-# 💎SafeSip – AI Based Water Potability Prediction System💧
+# 💎SafeSip – AI Based Water Potability Prediction System
 
 <br>
 

@@ -70,11 +70,34 @@ https://watersafenotsafe.streamlit.app/
 
 ✔ Selected Final Model: CatBoostClassifier
 
-✦ Best accuracy
+  ✦ Best accuracy
 
-✦ Handles missing values
+  ✦ Handles missing values
 
-✦ Handles non-linear patterns
+  ✦ Handles non-linear patterns
 
-✦ Fast training
+  ✦ Fast training
+<br>
+
+## 🧠 ML Pipeline
+
+○ Data Cleaning
+
+○ Missing value handling
+
+○ Feature Scaling (StandardScaler)
+
+○ Train-test split (80-20)
+
+○ Model training
+
+○ Optuna hyperparameter tuning
+
+○ Evaluation (Accuracy, Precision, Recall, F1-score)
+
+○ Confusion Matrix
+
+○ Final model selection
+
+○ Streamlit deployment
 <br>

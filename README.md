@@ -17,7 +17,9 @@ Manual lab testing is time-consuming and expensive, which leads to health risks.
 This project solves the problem by:
 
 • Predicting potability using ML
+
 • Providing instant results
+
 • Helping people avoid unsafe drinking water
 
 <br> 

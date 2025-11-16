@@ -57,7 +57,9 @@ https://watersafenotsafe.streamlit.app/
 | **Turbidity**       | Clarity of water                 |
 | **Potability**      | 1 = Drinkable, 0 = Not Drinkable |
 <br>
+
 ## 🧪 Machine Learning Models Used
+
 | Model                      | Accuracy | Notes            |
 | -------------------------- | -------- | ---------------- |
 | **Random Forest (Optuna)** | ~83%     | Strong baseline  |

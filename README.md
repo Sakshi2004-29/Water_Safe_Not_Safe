@@ -23,7 +23,7 @@ This project predicts whether drinking water is Safe (1) or Not Safe (0) using c
 
 The repository includes:
 
-● Complete Jupyter/Colab notebook
+● Complete Colab notebook
 
 ● Trained ML models (CatBoost, XGBoost, LGBM, RF, AdaBoost)
 
